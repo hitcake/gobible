@@ -1,0 +1,34 @@
+package main
+
+import "fmt"
+
+const (
+	_   = 1 << (10 * iota)
+	KiB // 1024
+	MiB // 1048576
+	GiB // 1073741824
+	TiB // 1099511627776             (exceeds 1 << 32)
+	PiB // 1125899906842624
+	EiB // 1152921504606846976
+	ZiB // 1180591620717411303424    (exceeds 1 << 64)
+	YiB // 1208925819614629174706176
+)
+
+const (
+	KB = 1000
+	MB = 1000 * KB
+	GB = 1000 * MB
+	TB = 1000 * GB
+	PB = 1000 * TB
+	EB = 1000 * PB
+	ZB = 1000 * EB
+	YB = 1000 * ZB
+)
+
+func main() {
+	fmt.Println(ZiB / EiB)
+	fmt.Println(TB / GB)
+	fmt.Println(PB / TB)
+	fmt.Println(ZB / EB)
+	fmt.Println(YB / ZB)
+}
