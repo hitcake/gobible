@@ -17,26 +17,23 @@ func main() {
 		}
 		doc, err := html.Parse(bytes.NewReader(data))
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "findlinks1: %v\n", err)
+			fmt.Fprintf(os.Stderr, "parsing %s as HTML: %v\n", url, err)
 			continue
 		}
-		for _, link := range visit(nil, doc) {
-			fmt.Println(link)
-		}
-	}
 
+		fmt.Println(extractText(doc))
+	}
 }
 
-func visit(links []string, n *html.Node) []string {
-	if n.Type == html.ElementNode && n.Data == "a" {
-		for _, a := range n.Attr {
-			if a.Key == "href" {
-				links = append(links, a.Val)
-			}
-		}
+func extractText(n *html.Node) (text []string) {
+	if n.Type == html.TextNode {
+		text = append(text, n.Data)
 	}
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		links = visit(links, c)
+		if c.Data == "script" || c.Data == "style" {
+			continue
+		}
+		text = append(text, extractText(c)...)
 	}
-	return links
+	return
 }

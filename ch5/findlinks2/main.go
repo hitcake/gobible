@@ -10,21 +10,27 @@ import (
 
 func main() {
 	for _, url := range os.Args[1:] {
-		data, err := fetch.Get(url)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
-			continue
-		}
-		doc, err := html.Parse(bytes.NewReader(data))
+		links, err := findlinks(url)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "findlinks1: %v\n", err)
 			continue
 		}
-		for _, link := range visit(nil, doc) {
+		for _, link := range links {
 			fmt.Println(link)
 		}
 	}
+}
 
+func findlinks(url string) ([]string, error) {
+	data, err := fetch.Get(url)
+	if err != nil {
+		return nil, fmt.Errorf("fetch: %s %v\n", url, err)
+	}
+	doc, err := html.Parse(bytes.NewReader(data))
+	if err != nil {
+		return nil, fmt.Errorf("parsing %s as HTML: %v", url, err)
+	}
+	return visit(nil, doc), nil
 }
 
 func visit(links []string, n *html.Node) []string {

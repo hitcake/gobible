@@ -1,10 +1,10 @@
 package main
 
 import (
+	"GoBible/ch5/fetch"
+	"bytes"
 	"fmt"
 	"golang.org/x/net/html"
-	"log"
-	"net/http"
 	"os"
 )
 
@@ -19,19 +19,18 @@ func outline(stack []string, n *html.Node) {
 }
 
 func main() {
-	resp, err := http.Get("http://www.baidu.com")
-	if err != nil {
-		log.Fatal(err)
-	}
-	if resp.StatusCode != http.StatusOK {
-		log.Fatal(resp.StatusCode)
+	for _, url := range os.Args[1:] {
+		data, err := fetch.Get(url)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
+			continue
+		}
+		doc, err := html.Parse(bytes.NewReader(data))
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "outline: %v\n", err)
+			continue
+		}
+		outline(nil, doc)
 	}
 
-	doc, err := html.Parse(resp.Body)
-	resp.Body.Close()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "outline: %v\n", err)
-		os.Exit(1)
-	}
-	outline(nil, doc)
 }
