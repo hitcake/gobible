@@ -1,4 +1,4 @@
-package main
+package tempconf
 
 import "fmt"
 
@@ -15,3 +15,4 @@ const (
 
 func (c Celsius) String() string    { return fmt.Sprintf("%g°C", c) }
 func (f Fahrenheit) String() string { return fmt.Sprintf("%g°F", f) }
+func (k Kelvin) String() string     { return fmt.Sprintf("%gK", k) }
