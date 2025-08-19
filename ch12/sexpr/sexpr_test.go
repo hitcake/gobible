@@ -1,6 +1,7 @@
-package display
+package sexpr
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -17,7 +18,7 @@ var strangelove = Movie{
 	Title:    "Dr. Strangelove",
 	Subtitle: "How I Learned to Stop Worrying and Love the Bomb",
 	Year:     1964,
-	Color:    false,
+	Color:    false, // bool 类型
 	Actor: map[string]string{
 		"Dr. Strangelove":            "Peter Sellers",
 		"Grp. Capt. Lionel Mandrake": "Peter Sellers",
@@ -35,23 +36,10 @@ var strangelove = Movie{
 	},
 }
 
-func TestDisplay(t *testing.T) {
-
-	Display("strangelove", strangelove)
-
-	//Display("os.Stderr", os.Stderr) //报错
-	//Display("rv", reflect.ValueOf(os.Stderr)) //报错
-
-	/*
-		Display i (int)
-		i = 3
-	*/
-	var i interface{} = 3
-	Display("i", i)
-	/*
-		Display &i (*interface {})
-		(*&i).type = int
-		(*&i).value = 3
-	*/
-	Display("&i", &i)
+func TestMarshal(t *testing.T) {
+	data, err := Marshal(strangelove)
+	if err != nil {
+		t.Error(err)
+	}
+	fmt.Println(string(data))
 }
