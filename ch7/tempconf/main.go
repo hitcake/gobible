@@ -3,11 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"gobible/ch2/tempconf"
+	"gobible/ch2/tempconv"
 )
 
 type celsiusFlag struct {
-	tempconf.Celsius
+	tempconv.Celsius
 }
 
 func (c *celsiusFlag) Set(s string) error {
@@ -16,21 +16,21 @@ func (c *celsiusFlag) Set(s string) error {
 	fmt.Sscanf(s, "%f%s", &value, &unit)
 	switch unit {
 	case "C", "°C":
-		c.Celsius = tempconf.Celsius(value)
+		c.Celsius = tempconv.Celsius(value)
 		return nil
 	case "F", "°F":
-		c.Celsius = tempconf.FToC(tempconf.Fahrenheit(value))
+		c.Celsius = tempconv.FToC(tempconv.Fahrenheit(value))
 		return nil
 		// 练习7.6
 	case "K", "°K":
-		c.Celsius = tempconf.KToC(tempconf.Kelvin(value))
+		c.Celsius = tempconv.KToC(tempconv.Kelvin(value))
 		return nil
 
 	}
 	return fmt.Errorf("invalid temperature %s", s)
 }
 
-func CelsiusFlag(name string, value tempconf.Celsius, usage string) *tempconf.Celsius {
+func CelsiusFlag(name string, value tempconv.Celsius, usage string) *tempconv.Celsius {
 	f := celsiusFlag{value}
 	flag.CommandLine.Var(&f, name, usage)
 	return &f.Celsius

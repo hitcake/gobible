@@ -3,10 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(PopCount2(5))
+	fmt.Println(PopCount(5))
 }
 
-func PopCount2(x uint64) int {
+func PopCount(x uint64) int {
 	var count int
 	for x != 0 {
 		if x&1 == 1 {
