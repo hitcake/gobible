@@ -1,4 +1,4 @@
-module GoBible
+module gobible
 
 go 1.24
 

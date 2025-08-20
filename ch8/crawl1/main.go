@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GoBible/ch5/links"
 	"fmt"
+	"gobible/ch5/links"
 	"log"
 	"os"
 )

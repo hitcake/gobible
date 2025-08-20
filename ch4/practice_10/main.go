@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GoBible/ch4/github"
 	"fmt"
+	"gobible/ch4/github"
 	"log"
 	"os"
 	"time"

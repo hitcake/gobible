@@ -1,9 +1,9 @@
 package main
 
 import (
-	"GoBible/ch5/fetch"
 	"bytes"
 	"fmt"
+	"gobible/ch5/fetch"
 	"golang.org/x/net/html"
 	"os"
 )

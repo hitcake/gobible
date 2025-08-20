@@ -1,9 +1,9 @@
 package main
 
 import (
-	"GoBible/ch2/tempconf"
 	"flag"
 	"fmt"
+	"gobible/ch2/tempconf"
 )
 
 type celsiusFlag struct {

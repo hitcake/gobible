@@ -1,8 +1,8 @@
 package practice_2
 
 import (
-	"GoBible/ch12/format"
 	"fmt"
+	"gobible/ch12/format"
 	"reflect"
 )
 

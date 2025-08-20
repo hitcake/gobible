@@ -1,8 +1,8 @@
 package display
 
 import (
-	"GoBible/ch12/format"
 	"fmt"
+	"gobible/ch12/format"
 	"reflect"
 )
 

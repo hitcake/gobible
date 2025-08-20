@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GoBible/ch12/params"
 	"fmt"
+	"gobible/ch12/params"
 	"net/http"
 )
 
