@@ -1,3 +1,4 @@
+// Echo1 prints its command-line arguments
 package main
 
 import (
@@ -7,10 +8,11 @@ import (
 
 // main method
 func main() {
-	var str string
+	var s, sep string
 	// 遍历os.Args
 	for i := 1; i < len(os.Args); i++ {
-		str = str + os.Args[i] + " "
+		s += sep + os.Args[i]
+		sep = " "
 	}
-	fmt.Println(str)
+	fmt.Println(s)
 }

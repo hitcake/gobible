@@ -12,7 +12,7 @@ func main() {
 	start := time.Now()
 	ch := make(chan string)
 	for _, url := range os.Args[1:] {
-		go fetch11(url, ch)
+		go fetch(url, ch)
 	}
 	for range os.Args[1:] {
 		fmt.Println(<-ch)
@@ -20,12 +20,9 @@ func main() {
 	fmt.Printf("%.2fs elapsed\n", time.Since(start).Seconds())
 }
 
-func fetch11(url string, ch chan<- string) {
+func fetch(url string, ch chan<- string) {
 	start := time.Now()
-	client := &http.Client{
-		Timeout: 5 * time.Second,
-	}
-	resp, err := client.Get(url)
+	resp, err := http.Get(url)
 	if err != nil {
 		ch <- fmt.Sprint(err)
 		return
@@ -41,3 +38,11 @@ func fetch11(url string, ch chan<- string) {
 	secs := time.Since(start).Seconds()
 	ch <- fmt.Sprintf("%.2f %7d %s", secs, nbytes, url)
 }
+
+/*
+output
+0.76   62967 https://go.dev
+1.50   33470 https://godoc.org
+2.09    4154 http://gopl.io
+2.09s elapsed
+*/

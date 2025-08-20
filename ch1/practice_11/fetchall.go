@@ -22,7 +22,11 @@ func main() {
 
 func fetch(url string, ch chan<- string) {
 	start := time.Now()
-	resp, err := http.Get(url)
+	// 设置超时
+	client := &http.Client{
+		Timeout: time.Second * 10, // 设置超时时间为10秒
+	}
+	resp, err := client.Get(url)
 	if err != nil {
 		ch <- fmt.Sprint(err)
 		return
@@ -38,3 +42,11 @@ func fetch(url string, ch chan<- string) {
 	secs := time.Since(start).Seconds()
 	ch <- fmt.Sprintf("%.2f %7d %s", secs, nbytes, url)
 }
+
+/*
+output
+1.30    4154 http://gopl.io
+1.49   62967 http://go.dev
+Get "http://golang.org": context deadline exceeded (Client.Timeout exceeded while awaiting headers)
+10.00s elapsed
+*/

@@ -8,9 +8,11 @@ import (
 	"io"
 	"math"
 	"math/rand"
+	"os"
+	"time"
 )
 
-var palette = []color.Color{color.White, color.RGBA{0, 255, 0, 255}}
+var palette = []color.Color{color.White, color.Black}
 
 const (
 	whiteIndex = 0 // first color in palette
@@ -19,13 +21,13 @@ const (
 
 // 在后面网页端输出gif时注释掉了这个main
 
-//func main() {
-//	// The sequence of images is deterministic unless we seed
-//	// the pseudo-random number generator using the current time.
-//	// Thanks to Randall McPherson for pointing out the omission.
-//	rand.Seed(time.Now().UTC().UnixNano())
-//	lissajous(os.Stdout)
-//}
+func main() {
+	// The sequence of images is deterministic unless we seed
+	// the pseudo-random number generator using the current time.
+	// Thanks to Randall McPherson for pointing out the omission.
+	rand.Seed(time.Now().UTC().UnixNano())
+	lissajous(os.Stdout)
+}
 
 func lissajous(out io.Writer) {
 	const (

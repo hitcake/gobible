@@ -6,9 +6,10 @@ import (
 )
 
 func main() {
-	var str string
+	s, sep := "", ""
 	for _, arg := range os.Args[1:] {
-		str = str + arg + " "
+		s += sep + arg
+		sep = " "
 	}
-	fmt.Println(str)
+	fmt.Println(s)
 }

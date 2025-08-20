@@ -38,3 +38,13 @@ func countLines(f *os.File, counts map[string]int) {
 		counts[input.Text()]++
 	}
 }
+
+/*
+output
+ dup2 % go build dup2.go
+ dup2 % ./dup2 dup.txt
+2       135
+2       131
+2       170
+2       181
+*/

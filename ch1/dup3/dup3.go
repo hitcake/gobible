@@ -9,7 +9,7 @@ import (
 func main() {
 	counts := make(map[string]int)
 	for _, filename := range os.Args[1:] {
-		//1.16开始不推荐使用
+		//ioutil.ReadFile从1.16开始不推荐使用
 		//data, err := ioutil.ReadFile(filename)
 		data, err := os.ReadFile(filename)
 		if err != nil {
@@ -29,8 +29,10 @@ func main() {
 
 /**
 output 顺序不确定
-2	131
-2	135
-2	170
-2	181
+dup3 % go build dup3.go
+dup3 % ./dup3 ../dup2/dup.txt
+2       131
+2       135
+2       170
+2       181
 */
