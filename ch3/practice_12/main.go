@@ -25,5 +25,5 @@ func equal(a, b string) bool {
 }
 
 func main() {
-	fmt.Println(equal("abc", "cbaa"))
+	fmt.Println(equal("人有所操", "操所有人"))
 }

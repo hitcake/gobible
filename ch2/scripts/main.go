@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"image"
+	"log"
+	"os"
 )
 
 func main() {
@@ -42,6 +44,17 @@ func main() {
 	p1 := new(int)
 	p2 := new(int)
 	fmt.Println(p1 == p2) //false
+
+	str := "hello world"
+	for _, x := range str {
+		x := x + 'A' - 'a'
+		fmt.Printf("%c", x)
+	}
+	cwd, err := os.Getwd()
+	if err != nil {
+		log.Fatalf("os.Getwd failed: %v", err)
+	}
+	log.Printf("working directory = %s\n", cwd)
 }
 
 func newf() *int {
