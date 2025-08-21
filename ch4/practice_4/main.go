@@ -5,8 +5,8 @@ import "fmt"
 /*
 *
 
-	K>0 向右选装
-	k<0 向左选装
+	K>0 向右旋转
+	k<0 向左旋转
 */
 func rotate(nums []int, k int) []int {
 	if k == 0 {

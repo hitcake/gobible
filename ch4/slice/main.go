@@ -28,4 +28,42 @@ func main() {
 	fmt.Printf("summer=%s,cap=%d\n", summer, cap(summer))
 	fmt.Printf("months=%s,cap=%d\n", months, cap(months))
 
+	// 创建slice
+	//make([]T, len)
+	//make([]T, len, cap) // same as make([]T, cap)[:len]
+
+	// 内置的append函数用于向slice追加元素：
+	var runes []rune
+	for _, r := range "Hello, 世界" {
+		runes = append(runes, r)
+	}
+	fmt.Printf("%q\n", runes) // "['H' 'e' 'l' 'l' 'o' ',' ' ' '世' '界']"
+}
+
+/*
+*
+和数组不同的是，slice之间不能比较，因此我们不能使用==操作符来判断两个slice是否含有全部相等元素。
+不过标准库提供了高度优化的bytes.Equal函数来判断两个字节型slice是否相等（[]byte），
+但是对于其他类型的slice，我们必须自己展开每个元素进行比较：
+*/
+func equal(x, y []string) bool {
+	if len(x) != len(y) {
+		return false
+	}
+	for i := range x {
+		if x[i] != y[i] {
+			return false
+		}
+	}
+	return true
+}
+
+func remove(s []int, i int) []int {
+	copy(s[i:], s[i+1:])
+	return s[:len(s)-1]
+}
+
+func removeNoOrder(s []int, i int) []int {
+	s[i] = s[len(s)-1]
+	return s[:len(s)-1]
 }
