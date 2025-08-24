@@ -55,7 +55,7 @@ func (db database) price(w http.ResponseWriter, req *http.Request) {
 	}
 	fmt.Fprintf(w, "%s\n", price)
 }
-func (db database) praseParamater(w http.ResponseWriter, req *http.Request) (string, dollars, error) {
+func (db database) parseParamater(w http.ResponseWriter, req *http.Request) (string, dollars, error) {
 	item := req.URL.Query().Get("item")
 	price := req.URL.Query().Get("price")
 	if item == "" || price == "" {
@@ -72,7 +72,7 @@ func (db database) praseParamater(w http.ResponseWriter, req *http.Request) (str
 	return item, dollars(priceF), nil
 }
 func (db database) create(w http.ResponseWriter, req *http.Request) {
-	item, price, err := db.praseParamater(w, req)
+	item, price, err := db.parseParamater(w, req)
 	if err != nil {
 		return
 	}
@@ -81,7 +81,7 @@ func (db database) create(w http.ResponseWriter, req *http.Request) {
 }
 
 func (db database) update(w http.ResponseWriter, req *http.Request) {
-	item, price, err := db.praseParamater(w, req)
+	item, price, err := db.parseParamater(w, req)
 	if err != nil {
 		return
 	}

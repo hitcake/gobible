@@ -1,9 +1,9 @@
-package main
+package tempconv
 
 import (
 	"flag"
 	"fmt"
-	"gobible/ch2/tempconv"
+	"gobible/ch2/practice_1"
 )
 
 type celsiusFlag struct {
@@ -38,7 +38,7 @@ func CelsiusFlag(name string, value tempconv.Celsius, usage string) *tempconv.Ce
 
 var temp = CelsiusFlag("temp", 20.0, "the temperature")
 
-func main() {
-	flag.Parse()
-	fmt.Println(*temp)
-}
+//func main() {
+//	flag.Parse()
+//	fmt.Println(*temp)
+//}
