@@ -16,9 +16,13 @@ func main() {
 	// Squarer
 	go func() {
 		for {
-			x := <-naturals
+			x, ok := <-naturals
+			if !ok {
+				break
+			}
 			squares <- x * x
 		}
+		close(squares)
 	}()
 
 	// Printer (in main goroutine)

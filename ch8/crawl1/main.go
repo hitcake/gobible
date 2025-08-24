@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func crawl1(url string) []string {
+func crawl(url string) []string {
 	fmt.Println(url)
 	list, err := links.Extract(url)
 	if err != nil {
@@ -26,7 +26,7 @@ func main() {
 			if !seen[link] {
 				seen[link] = true
 				go func(link string) {
-					worklist <- crawl1(link)
+					worklist <- crawl(link)
 				}(link)
 			}
 		}
