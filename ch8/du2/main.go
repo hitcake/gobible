@@ -71,4 +71,5 @@ loop:
 			printDiskUsage(nfiles, nbytes)
 		}
 	}
+	printDiskUsage(nfiles, nbytes)
 }

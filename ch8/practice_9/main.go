@@ -59,13 +59,7 @@ func cancelled() bool {
 		return false
 	}
 }
-
-func main() {
-	flag.Parse()
-	roots := flag.Args()
-	if len(roots) == 0 {
-		roots = []string{"."}
-	}
+func caculateSpace(roots []string) {
 	go func() {
 		os.Stdin.Read(make([]byte, 1)) // read a single byte
 		close(done)
@@ -107,4 +101,16 @@ loop:
 		}
 	}
 	printDiskUsage(nfiles, nbytes) // final totals
+}
+
+func main() {
+	tik := time.Tick(3 * time.Second)
+	for {
+		select {
+		case <-tik:
+			caculateSpace([]string{"/Users/hit/Downloads"})
+
+		}
+	}
+
 }
